@@ -5,6 +5,10 @@ Requirements
 
 Ruby version 2.1.5
 Gosu version 0.8.6
+three image files included in this repository
+Black_Circle.png
+Empty_Space.png
+White_Circle.png
 
 Operation
 
