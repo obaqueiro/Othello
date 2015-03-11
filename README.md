@@ -3,7 +3,7 @@ Ruby version of Othello board game
 
 Requirements
 
-Ruby version 2.1.5\s\s
+Ruby version 2.1.5  
 Gosu version 0.8.6\s\s
 three image files included in this repository\s\s
 Black_Circle.png\s\s
