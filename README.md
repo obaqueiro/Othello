@@ -17,3 +17,10 @@ Type your name and then press the return key.
 The rest of the game uses the mouse.
 Click the space you want to put your piece in.
 To close the game press "c" and to reset press "r" 
+
+The game works as it should. In the future I would like to add multiple states for the window  
+to make a better GUI.
+
+Images 
+
+All images included were created by me using Gimp 2
