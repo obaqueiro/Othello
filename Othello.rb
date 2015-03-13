@@ -504,8 +504,8 @@ class Player
 		@y = cor[:y]
 		@z = cor[:z]
 		@tag.draw(	@x,
-							@y,
-							@z)
+						@y,
+						@z)
 	end
 end
 
