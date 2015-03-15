@@ -7,12 +7,14 @@ ruby
 gosu
 
 The versions used for testing were:
-ruby version 2.1.5
-gosu version 0.8.6
+ruby version 2.1.5  
+gosu version 0.8.6  
 
 Operation
 
-When you run the game there will be two prompts for the player names. 
+To run the game go your command prompt change directories to the directory containing the Othello_run.rb.
+When in said directory type "ruby Othello_run.rb" and press enter.
+When the game window appears, you will be have two prompts for the player names. 
 Type your name and then press the return key.
 The rest of the game uses the mouse.
 Click the space you want to put your piece in.
