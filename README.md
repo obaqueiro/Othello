@@ -12,7 +12,7 @@ gosu version 0.8.6
 
 Operation
 
-To run the game go your command prompt change directories to the directory containing the Othello_run.rb.
+To run the game go to your command prompt change directories to the directory containing the Othello_run.rb.
 When in said directory type "ruby Othello_run.rb" and press enter.
 When the game window appears, you will be have two prompts for the player names. 
 Type your name and then press the return key.
