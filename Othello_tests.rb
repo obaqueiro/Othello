@@ -2,6 +2,8 @@ require_relative "Othello.rb"
 require "test/unit"
 require "gosu"
 
+$window = Gosu::Window.new(400,450,false)
+
 class Test_Game < Test::Unit::TestCase
 	
 	def setup
@@ -25,7 +27,7 @@ end
 
 class Test_Board < Test::Unit::TestCase
 	def setup
-		@window = Gosu::Window.new(400,450,false)
+		@window = $window
 		@board = Board.new(@window)
 	end
 	
@@ -77,7 +79,7 @@ end
 
 class Test_Player < Test::Unit::TestCase
 	def setup
-		@window = Gosu::Window.new(200,200,false)
+		@window = $window
 		@player = Player.new(:Window=> @window, :Color => :Black)
 	end
 	
@@ -94,7 +96,7 @@ end
 class Test_Space < Test::Unit::TestCase
 
 	def setup
-		@window = Gosu::Window.new(200,200,false)
+		@window = $window
 		@space = Space.new(@window)
 		@test_image = (Gosu::Image.new(@window,"White_Circle.png",false))
 	end

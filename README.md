@@ -3,12 +3,12 @@ Ruby version of Othello board game
 
 Requirements
 
-Ruby version 2.1.5  
-Gosu version 0.8.6  
-three image files included in this repository  
-Black_Circle.png  
-Empty_Space.png  
-White_Circle.png  
+ruby
+gosu
+
+The versions used for testing were:
+ruby version 2.1.5
+gosu version 0.8.6
 
 Operation
 
@@ -18,7 +18,7 @@ The rest of the game uses the mouse.
 Click the space you want to put your piece in.
 To close the game press "c" and to reset press "r" 
 
-The game works as it should. In the future I would like to add multiple states for the window  
+The game works as it should. In the future I would like to add multiple states for the window 
 to make a better GUI.
 
 Images 

@@ -539,6 +539,3 @@ class Space
 		@image.draw(x*50,(1+y)*50,0)
 	end
 end
-
-game = Game.new
-game.show
