@@ -27,8 +27,7 @@ end
 
 class Test_Board < Test::Unit::TestCase
 	def setup
-		@window = $window
-		@board = Board.new(@window)
+		@board = Board.new($window)
 	end
 	
 	def teardown
@@ -53,7 +52,7 @@ class Test_Board < Test::Unit::TestCase
 	end
 	
 	def test_count
-		space = Space.new(@window)
+		space = Space.new($window)
 		space.set_contents(:Black)
 		@board.count(space)
 		assert_equal(1,@board.black_count)
@@ -79,8 +78,7 @@ end
 
 class Test_Player < Test::Unit::TestCase
 	def setup
-		@window = $window
-		@player = Player.new(:Window=> @window, :Color => :Black)
+		@player = Player.new(:Window=> $window, :Color => :Black)
 	end
 	
 	def teardown
@@ -96,9 +94,8 @@ end
 class Test_Space < Test::Unit::TestCase
 
 	def setup
-		@window = $window
-		@space = Space.new(@window)
-		@test_image = (Gosu::Image.new(@window,"White_Circle.png",false))
+		@space = Space.new($window)
+		@test_image = (Gosu::Image.new($window,"White_Circle.png",false))
 	end
 	
 	def teardown
