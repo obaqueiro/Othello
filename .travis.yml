@@ -3,4 +3,4 @@ rvm:
     - 2.3.5
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get -y ruby-dev
+  - sudo apt-get install -y ruby-dev
