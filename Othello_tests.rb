@@ -1,3 +1,9 @@
+require 'simplecov'
+SimpleCov.start
+
+require 'codecov'
+SimpleCov.formatter = SimpleCov::Formatter::Codecov
+
 require_relative "Othello.rb"
 require "test/unit"
 require "gosu"
