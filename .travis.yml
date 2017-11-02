@@ -4,6 +4,14 @@ rvm:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y build-essential libgl1-mesa-dev libgles2-mesa-dev libsdl2-dev libsdl2-ttf-dev libpango1.0-dev libopenal-dev libsndfile-dev libmpg123-dev libgmp-dev ruby-dev
-env:
-  - DISPLAY=:0
-
+before_script:
+  # Enable "dummy" devices for audio and video on Linux.
+  # copied from gosu repo
+  - |
+    if [ $TRAVIS_OS_NAME != osx ]; then
+      export DISPLAY=:99.0
+      sh -e /etc/init.d/xvfb start
+      sleep 3
+      sudo modprobe snd-dummy
+      sudo usermod -a -G audio $USER
+    fi
