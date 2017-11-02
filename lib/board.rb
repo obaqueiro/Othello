@@ -1,4 +1,4 @@
-require_relative 'space.rb'
+require_relative 'space'
 
 class Board
   attr_accessor :white_count, :black_count
@@ -36,7 +36,7 @@ class Board
     @all_direction_arrays = []
     for dx in (-1..1)
       for dy in (-1..1)
-        @all_direction_arrays.push(direction_array(dx, dy, pos_x, pos_y)) unless (dx == 0) && (dy == 0)
+        @all_direction_arrays.push(direction_array(dx, dy, pos_x, pos_y)) unless dx.zero? && dy.zero?
       end
     end
     @all_direction_arrays
@@ -44,15 +44,15 @@ class Board
 
   def valid_directions(pos_x, pos_y, player_color)
     all_direction_arrays(pos_x, pos_y).each	do |direction_array|
-      return true if is_valid_direction(player_color, direction_array)
+      return true if valid_direction?(player_color, direction_array)
     end
     false
   end
 
-  def is_valid_direction(player_color, direction_array)
+  def valid_direction?(player_color, direction_array)
     seen_opp_color = false
     direction_array.each	do |space|
-      content = space.get_contents
+      content = space.state
       if content == :Empty
         return false
       elsif content == player_color
@@ -71,20 +71,14 @@ class Board
   def change_pieces(player_color, direction_array)
     opp_color = player_color == :White ? :Black : :White
     direction_array.each	do |space|
-      content = space.get_contents
-      if content == :Empty
-        break
-      elsif content == opp_color
-        space.set_contents(player_color)
-      else
-        break
-      end
+      break unless opp_color == space.state
+      space.state = player_color
     end
   end
 
   def change_all_pieces(pos_x, pos_y, player_color)
     all_direction_arrays(pos_x, pos_y).each	do |direction_array|
-      if is_valid_direction(player_color, direction_array)
+      if valid_direction?(player_color, direction_array)
         change_pieces(player_color, direction_array)
       end
     end
@@ -95,21 +89,21 @@ class Board
   end
 
   def count(space)
-    if space.get_contents == :White
+    if space.state == :White
       @white_count += 1
-    elsif space.get_contents == :Black
+    elsif space.state == :Black
       @black_count += 1
     end
   end
 
   def othello_board_start
-    @grid[3][3].set_contents(:White)
-    @grid[4][4].set_contents(:White)
-    @grid[3][4].set_contents(:Black)
-    @grid[4][3].set_contents(:Black)
+    @grid[3][3].state= :White
+    @grid[4][4].state= :White
+    @grid[3][4].state= :Black
+    @grid[4][3].state= :Black
     # test board end game
-    # @grid[1][0].set_contents(:Black)
-    # @grid[0][0].set_contents(:White)
+    # @grid[1][0].state(:Black)
+    # @grid[0][0].state(:White)
   end
 
   def draw_board
@@ -120,23 +114,17 @@ class Board
     end
   end
 
-  def is_valid_move?(color, x, y)
-    if @grid[x][y].get_contents == :Empty && valid_directions(x, y, color)
-      true
-    else
-      false
-    end
+  def valid_move?(color, x, y)
+    @grid[x][y].state == :Empty && valid_directions(x, y, color)
   end
 
   def make_move(color, x, y)
-    @grid[x][y].set_contents(color)
+    @grid[x][y].state = color
     change_all_pieces(x, y, color)
   end
 
   def possible_move(x, y, player_color)
-    if (@grid[x][y].get_contents == :Empty) && valid_directions(x, y, player_color)
-      true
-    end
+    (@grid[x][y].state == :Empty) && valid_directions(x, y, player_color)
   end
 
   def possible_moves(player_color)

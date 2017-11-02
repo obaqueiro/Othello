@@ -101,7 +101,7 @@ class Game < Gosu::Window
 
   def select_space(color, current_turn)
     mouse_position
-    if	@board.is_valid_move?(color, @x, @y)
+    if	@board.valid_move?(color, @x, @y)
       valid_move(color, @x, @y, current_turn)
     else
       invalid_move

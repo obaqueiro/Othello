@@ -1,4 +1,4 @@
-require_relative "Othello.rb"
+require_relative "../lib/game.rb"
 
 game = Game.new
 game.show

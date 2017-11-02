@@ -1,10 +1,10 @@
-require 'simplecov'
-SimpleCov.start
+# require 'simplecov'
+# SimpleCov.start
 
-require 'codecov'
-SimpleCov.formatter = SimpleCov::Formatter::Codecov
+# require 'codecov'
+# SimpleCov.formatter = SimpleCov::Formatter::Codecov
 
-require "./lib/Othello.rb"
+require_relative "../lib/game"
 require "test/unit"
 require "gosu"
 
@@ -59,18 +59,18 @@ class Test_Board < Test::Unit::TestCase
 
 	def test_count
 		space = Space.new($window)
-		space.set_contents(:Black)
+		space.state= :Black
 		@board.count(space)
 		assert_equal(1,@board.black_count)
 	end
 
-	def test_is_valid_move?
-		assert_equal(true,@board.is_valid_move?(:Black,2,3))
-		assert_not_equal(true, @board.is_valid_move?(:Black,5,3))
+	def test_valid_move?
+		assert_equal(true,@board.valid_move?(:Black,2,3))
+		assert_not_equal(true, @board.valid_move?(:Black,5,3))
 	end
 
-	def test_possible_move
-		assert_equal(true, @board.possible_move(2,3,:Black))
+  def test_possible_move
+    assert_equal(true, @board.possible_move(2,3,:Black))
 	end
 
 	def test_possible_moves
@@ -109,9 +109,5 @@ class Test_Space < Test::Unit::TestCase
 
 	def test_new_image
 		assert_kind_of(Gosu::Image, @space.new_image(File.expand_path("images/White_Circle.png")))
-	end
-
-	def test_get_contents
-		assert_equal(:Empty, @space.get_contents)
 	end
 end
