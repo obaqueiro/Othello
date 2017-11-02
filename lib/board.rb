@@ -16,30 +16,27 @@ class Board
   end
 
   def direction_array(dx, dy, x, y)
-    @pos_x = x + dx
-    @pos_y = y + dy
-    @direction_array = []
-    until (@pos_x > 7) || (@pos_x < 0) || (@pos_y > 7) || (@pos_y < 0)
-      @direction_array.push(@grid[@pos_x][@pos_y])
-      add_delta_to_pos(dx, dy)
+    pos = [x + dx, y + dy]
+    array = []
+    until (pos[0] > 7) || (pos[0] < 0) || (pos[1] > 7) || (pos[1] < 0)
+      array.push(@grid[pos[0]][pos[1]])
+      pos = add_delta_to_pos(dx, dy, pos)
     end
-
-    @direction_array
+    array
   end
 
-  def add_delta_to_pos(delta_x, delta_y)
-    @pos_x += delta_x
-    @pos_y += delta_y
+  def add_delta_to_pos(dx, dy, pos)
+    [pos[0] + dx, pos[1] + dy]
   end
 
   def all_direction_arrays(pos_x, pos_y)
-    @all_direction_arrays = []
+    arrays = []
     for dx in (-1..1)
       for dy in (-1..1)
-        @all_direction_arrays.push(direction_array(dx, dy, pos_x, pos_y)) unless dx.zero? && dy.zero?
+        arrays.push(direction_array(dx, dy, pos_x, pos_y)) unless dx.zero? && dy.zero?
       end
     end
-    @all_direction_arrays
+    arrays
   end
 
   def valid_directions(pos_x, pos_y, player_color)
