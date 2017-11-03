@@ -6,7 +6,7 @@ class Player
     @args = args
     @color = @args[:Color]
     @window = @args[:Window]
-    @name = ''
+    @name = @args[:Name]
   end
 
   def set_player_name(text)

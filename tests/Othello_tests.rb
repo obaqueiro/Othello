@@ -39,10 +39,10 @@ class TestBoard < Test::Unit::TestCase
   end
 
   def test_all_direction_arrays
-    assert_equal(8, @board.all_direction_arrays(5,5).length)
+    assert_equal(8, @board.all_direction_arrays(5, 5).length)
   end
 
-  #I could not find a way to test valid_directions, is_valid_direction, change_pieces, or change_all_pieces
+  # I could not find a way to test valid_directions, is_valid_direction, change_pieces, or change_all_pieces
 
   def test_count_pieces
     @board.count_pieces
@@ -63,7 +63,7 @@ class TestBoard < Test::Unit::TestCase
   end
 
   def test_possible_move
-    assert_equal(true, @board.possible_move(2,3,:Black))
+    assert_equal(true, @board.possible_move(2, 3, :Black))
   end
 
   def test_possible_moves
