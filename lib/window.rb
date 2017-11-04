@@ -19,7 +19,7 @@ class TextImage
   end
 
   def draw(x, y, z, scale_x = 1, scale_y = 1, color = 0xff_ffffff, mode = :default)
-    @image.draw(x,y,z, scale_x, scale_y, color, mode)
+    @image.draw(x, y, z, scale_x, scale_y, color, mode)
   end
 end
 
@@ -53,9 +53,19 @@ class Window < Gosu::Window
   def button_down(id)
     case id
     when Gosu::MsLeft
-    # TODO: Add Try catch for game turn
+      begin
+        # TODO: Need to fix game core
+
+        raise ArgumentError, 'Invalid Move'
+        end_game_state
+      rescue ArgumentError => e
+        @prompts[:Center].text = "#{@current_player}\n#{e}"
+      end
+
     when Gosu::KbR
       reset unless @settings[:Input]
+    when Gosu::KbT
+      end_game_state
     when Gosu::KbC
       close unless @settings[:Input]
     when Gosu::KbReturn
@@ -84,7 +94,7 @@ class Window < Gosu::Window
 
           playing_state
         end
-     end
+      end
 
     when Gosu::KbBackspace
       close
@@ -134,7 +144,15 @@ class Window < Gosu::Window
   end
 
   def end_game_state
-    # TODO: Create a gui state for end game
+    @score = {
+      Black: 13,
+      White: 12}
+    @winner = 'Black'
+
+    @prompts[:Left].text = 'Press R to reset game'
+    @prompts[:Right].text = 'Press C to close game'
+    @prompts[:Center].text = "Black: #{@score[:Black]} White: #{@score[:White]}\nWinner: #{@winner}"
+
   end
 
   def draw_board
