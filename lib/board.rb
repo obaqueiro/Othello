@@ -38,14 +38,6 @@ class Board
     array
   end
 
-  def valid_directions?(grid, x, y, color)
-    array = directions(grid, x, y).map { |direction| valid_direction?(color, direction)}
-    array.include?(true)
-    # directions(grid, x, y).each	do |direction|
-    #   return valid_direction?(color, direction)
-    # end
-  end
-
   def valid_direction?(color, direction)
     opp_color = false
     direction.each	do |space|
@@ -60,12 +52,14 @@ class Board
     false
   end
 
-  def change_pieces(player_color, direction)
-    opp_color = player_color == :White ? :Black : :White
-    direction.each	do |space|
-      break unless opp_color == space.state
-      space.state = player_color
-    end
+  def valid_directions?(grid, x, y, color)
+    array = directions(grid, x, y).map { |direction| valid_direction?(color, direction)}
+    array.include?(true)
+  end
+
+
+  def change_pieces_inline(direction, color)
+    direction.map {|piece| color }
   end
 
   def change_all_pieces(pos_x, pos_y, player_color)
@@ -98,14 +92,6 @@ class Board
     # @grid[0][0].state(:White)
   end
 
-  def draw_board
-    for x in (0..7)
-      for y in (0..7)
-        @grid[x][y].draw_space(x, y)
-      end
-    end
-  end
-
   def valid_move?(color, x, y)
     @grid[x][y].state == :Empty && valid_directions?(x, y, color)
   end
@@ -122,17 +108,13 @@ class Board
   def possible_moves(player_color)
     for x in (0..7)
       for y in (0..7)
-        return true if possible_move(x, y, player_color)
+        return possible_move(x, y, player_color)
       end
     end
     false
   end
 
   def no_moves_left(player_color)
-    if possible_moves(player_color)
-      false
-    else
-      true
-    end
+    !possible_moves(player_color)
   end
 end

@@ -50,6 +50,9 @@ class TestBoard < Test::Unit::TestCase
      print(@grid1[4][3])
    end
 
+   def test_change_pieces_inline
+     assert_equal([:White, :White, :White], @board.change_pieces_inline([:Black, :Black, :White], :White))
+   end
 
 #   def test_count_pieces
 #     @board.count_pieces
