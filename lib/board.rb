@@ -38,20 +38,19 @@ class Board
     array
   end
 
-  def valid_directions(pos_x, pos_y, player_color)
-    all_directions(pos_x, pos_y).each	do |direction_array|
-      return true if valid_direction?(player_color, direction)
+  def valid_directions?(pos_x, pos_y, player_color)
+    directions(pos_x, pos_y).each	do |direction|
+      return valid_direction?(player_color, direction)
     end
-    false
+    # false
   end
 
   def valid_direction?(player_color, direction)
     seen_opp_color = false
     direction.each	do |space|
-      content = space.state
-      if content == :Empty
+      if space == :Empty
         return false
-      elsif content == player_color
+      elsif space == player_color
         if seen_opp_color
           return true
         else
@@ -111,7 +110,7 @@ class Board
   end
 
   def valid_move?(color, x, y)
-    @grid[x][y].state == :Empty && valid_directions(x, y, color)
+    @grid[x][y].state == :Empty && valid_directions?(x, y, color)
   end
 
   def make_move(color, x, y)
@@ -120,7 +119,7 @@ class Board
   end
 
   def possible_move(x, y, player_color)
-    (@grid[x][y].state == :Empty) && valid_directions(x, y, player_color)
+    (@grid[x][y].state == :Empty) && valid_directions?(x, y, player_color)
   end
 
   def possible_moves(player_color)

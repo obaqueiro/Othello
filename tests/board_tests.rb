@@ -24,7 +24,7 @@ class TestBoard < Test::Unit::TestCase
      assert_equal([:Empty, :Empty, :White, :Empty], @board.direction(@grid1, -1, 0, 4, 4))
    end
 
-   def test_all_direction_arrays
+   def test_directions
      assert_equal([[:Black, :Empty, :Empty, :Empty],
                    [:Empty, :Empty, :White, :Empty],
                    [:Empty, :Empty, :Empty],
@@ -35,7 +35,14 @@ class TestBoard < Test::Unit::TestCase
                    [:Empty, :Empty, :Empty]], @board.directions(@grid1, 4, 4))
    end
 
-#   # I could not find a way to test valid_directions, is_valid_direction, change_pieces, or change_all_pieces
+   def test_valid_direction_empty_space
+     assert(!@board.valid_direction?(:Black, [:Empty, :White]))
+     assert(!@board.valid_direction?(:Black, [:White, :White, :Empty]))
+   end
+
+   def test_valid_direction
+     assert(@board.valid_direction?(:Black, [:White, :White, :Black]))
+   end
 
 #   def test_count_pieces
 #     @board.count_pieces
