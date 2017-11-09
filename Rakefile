@@ -11,5 +11,6 @@ end
 multitask :gui => [:win, :run] do
 end
 task :test do
-  ruby "./tests/Othello_tests.rb"
+  # ruby "./tests/game_tests.rb"
+  ruby "./tests/board_tests.rb"
 end

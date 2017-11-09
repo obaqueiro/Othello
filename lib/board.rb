@@ -3,8 +3,7 @@ require_relative 'space'
 class Board
   attr_accessor :white_count, :black_count
 
-  def initialize(window)
-    @window = window
+  def initialize
     @white_count = 0
     @black_count = 0
     make_grid
@@ -12,43 +11,43 @@ class Board
   end
 
   def make_grid
-    @grid = Array.new(8) { Array.new(8) { Space.new(@window) } }
+    @grid = Array.new(8) { Array.new(8) { :Empty } }
   end
 
-  def direction_array(dx, dy, x, y)
-    pos = [x + dx, y + dy]
+  def direction(grid, dx, dy, x, y)
+    pos = [y + dy, x + dx]
     array = []
     until (pos[0] > 7) || (pos[0] < 0) || (pos[1] > 7) || (pos[1] < 0)
-      array.push(@grid[pos[0]][pos[1]])
+      array.push(grid[pos[0]][pos[1]])
       pos = add_delta_to_pos(dx, dy, pos)
     end
     array
   end
 
   def add_delta_to_pos(dx, dy, pos)
-    [pos[0] + dx, pos[1] + dy]
+    [pos[0] + dy, pos[1] + dx]
   end
 
-  def all_direction_arrays(pos_x, pos_y)
+  def all_directions(pos_x, pos_y)
     arrays = []
     for dx in (-1..1)
       for dy in (-1..1)
-        arrays.push(direction_array(dx, dy, pos_x, pos_y)) unless dx.zero? && dy.zero?
+        arrays.push(direction(dx, dy, pos_x, pos_y)) unless dx.zero? && dy.zero?
       end
     end
     arrays
   end
 
   def valid_directions(pos_x, pos_y, player_color)
-    all_direction_arrays(pos_x, pos_y).each	do |direction_array|
-      return true if valid_direction?(player_color, direction_array)
+    all_directions(pos_x, pos_y).each	do |direction_array|
+      return true if valid_direction?(player_color, direction)
     end
     false
   end
 
-  def valid_direction?(player_color, direction_array)
+  def valid_direction?(player_color, direction)
     seen_opp_color = false
-    direction_array.each	do |space|
+    direction.each	do |space|
       content = space.state
       if content == :Empty
         return false
@@ -65,18 +64,18 @@ class Board
     false
   end
 
-  def change_pieces(player_color, direction_array)
+  def change_pieces(player_color, direction)
     opp_color = player_color == :White ? :Black : :White
-    direction_array.each	do |space|
+    direction.each	do |space|
       break unless opp_color == space.state
       space.state = player_color
     end
   end
 
   def change_all_pieces(pos_x, pos_y, player_color)
-    all_direction_arrays(pos_x, pos_y).each	do |direction_array|
-      if valid_direction?(player_color, direction_array)
-        change_pieces(player_color, direction_array)
+    all_directions(pos_x, pos_y).each	do |direction_array|
+      if valid_direction?(player_color, direction)
+        change_pieces(player_color, direction)
       end
     end
   end
@@ -94,10 +93,10 @@ class Board
   end
 
   def othello_board_start
-    @grid[3][3].state= :White
-    @grid[4][4].state= :White
-    @grid[3][4].state= :Black
-    @grid[4][3].state= :Black
+    @grid[3][3] = :White
+    @grid[4][4] = :White
+    @grid[3][4] = :Black
+    @grid[4][3] = :Black
     # test board end game
     # @grid[1][0].state(:Black)
     # @grid[0][0].state(:White)
