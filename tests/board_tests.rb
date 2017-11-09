@@ -44,6 +44,13 @@ class TestBoard < Test::Unit::TestCase
      assert(@board.valid_direction?(:Black, [:White, :White, :Black]))
    end
 
+   def test_valid_directions
+     assert(!@board.valid_directions?(@grid1, 4, 4, :Black))
+     assert(@board.valid_directions?(@grid1, 5, 5, :Black))
+     print(@grid1[4][3])
+   end
+
+
 #   def test_count_pieces
 #     @board.count_pieces
 #     assert_equal(2, @board.white_count)

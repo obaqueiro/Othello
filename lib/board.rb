@@ -38,26 +38,23 @@ class Board
     array
   end
 
-  def valid_directions?(pos_x, pos_y, player_color)
-    directions(pos_x, pos_y).each	do |direction|
-      return valid_direction?(player_color, direction)
-    end
-    # false
+  def valid_directions?(grid, x, y, color)
+    array = directions(grid, x, y).map { |direction| valid_direction?(color, direction)}
+    array.include?(true)
+    # directions(grid, x, y).each	do |direction|
+    #   return valid_direction?(color, direction)
+    # end
   end
 
-  def valid_direction?(player_color, direction)
-    seen_opp_color = false
+  def valid_direction?(color, direction)
+    opp_color = false
     direction.each	do |space|
       if space == :Empty
         return false
-      elsif space == player_color
-        if seen_opp_color
-          return true
-        else
-          return false
-        end
+      elsif space == color
+        return opp_color
       else
-        seen_opp_color = true
+        opp_color = true
       end
     end
     false
@@ -72,7 +69,7 @@ class Board
   end
 
   def change_all_pieces(pos_x, pos_y, player_color)
-    all_directions(pos_x, pos_y).each	do |direction_array|
+    all_directions(pos_x, pos_y).each	do |direction|
       if valid_direction?(player_color, direction)
         change_pieces(player_color, direction)
       end
