@@ -47,11 +47,19 @@ class TestBoard < Test::Unit::TestCase
    def test_valid_directions
      assert(!@board.valid_directions?(@grid1, 4, 4, :Black))
      assert(@board.valid_directions?(@grid1, 5, 5, :Black))
-     print(@grid1[4][3])
    end
 
    def test_change_pieces_inline
      assert_equal([:White, :White, :White], @board.change_pieces_inline([:Black, :Black, :White], :White))
+   end
+
+   def test_change_all_pieces
+     assert_equal([[:Black, :Black, :Black],
+                   [:White, :Empty],
+                   [:Empty, :Empty, :Empty, :Black]],
+                  @board.change_all_pieces([[:White, :White, :Black],
+                                            [:White, :Empty],
+                                            [:Empty, :Empty, :Empty, :Black]], :Black))
    end
 
 #   def test_count_pieces

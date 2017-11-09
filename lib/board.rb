@@ -62,12 +62,14 @@ class Board
     direction.map {|piece| color }
   end
 
-  def change_all_pieces(pos_x, pos_y, player_color)
-    all_directions(pos_x, pos_y).each	do |direction|
-      if valid_direction?(player_color, direction)
-        change_pieces(player_color, direction)
+  def change_all_pieces(directions, color)
+    directions.map { |direction|
+      if valid_direction?(color, direction)
+        change_pieces_inline(direction, color)
+      else
+        direction
       end
-    end
+    }
   end
 
   def count_pieces
