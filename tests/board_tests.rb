@@ -18,6 +18,15 @@ class TestBoard < Test::Unit::TestCase
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty]]
+
+    @grid2 = [[:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
+              [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
+              [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
+              [:Empty, :Empty, :Empty, :Black, :Empty, :Empty, :Empty, :Empty],
+              [:Empty, :White, :Empty, :Empty, :Black, :Empty, :Black, :Empty],
+              [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
+              [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
+              [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty]]
   end
 
    def test_direction
@@ -60,6 +69,19 @@ class TestBoard < Test::Unit::TestCase
                   @board.change_all_pieces([[:White, :White, :Black],
                                             [:White, :Empty],
                                             [:Empty, :Empty, :Empty, :Black]], :Black))
+   end
+
+   def test_merge_changes
+     assert_equal(@grid2,
+                  @board.merge_changes(@grid1,
+                                       [[:Black, :Black, :Empty, :Empty, :Empty],
+                                        [:Empty, :Empty, :Empty, :Empty, :Empty],
+                                        [:Empty, :Empty],
+                                        [:Empty, :Empty, :Empty, :Empty, :Empty],
+                                        [:Empty, :Empty],
+                                        [:Black, :Empty],
+                                        [:Empty, :Empty],
+                                        [:Empty, :Empty]], 5, 5))
    end
 
 #   def test_count_pieces

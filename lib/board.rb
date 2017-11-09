@@ -72,6 +72,23 @@ class Board
     }
   end
 
+  def merge_changes(grid, directions, x, y)
+    i = 0
+    for dx in (-1..1)
+      for dy in (-1..1)
+        unless dx.zero? && dy.zero?
+          pos = [y + dy, x + dx]
+          directions[i].each { |space| 
+            grid[pos[0]][pos[1]] = space
+            pos = add_delta(dx, dy, pos)
+          }
+          i += 1
+        end
+      end
+    end
+    grid
+  end
+
   def count_pieces
     @grid.each { |x_space| x_space.each { |y_space| count(y_space) } }
   end
