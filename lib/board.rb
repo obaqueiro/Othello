@@ -19,23 +19,23 @@ class Board
     array = []
     until (pos[0] > 7) || (pos[0] < 0) || (pos[1] > 7) || (pos[1] < 0)
       array.push(grid[pos[0]][pos[1]])
-      pos = add_delta_to_pos(dx, dy, pos)
+      pos = add_delta(dx, dy, pos)
     end
     array
   end
 
-  def add_delta_to_pos(dx, dy, pos)
+  def add_delta(dx, dy, pos)
     [pos[0] + dy, pos[1] + dx]
   end
 
-  def all_directions(pos_x, pos_y)
-    arrays = []
+  def directions(grid, x, y)
+    array = []
     for dx in (-1..1)
       for dy in (-1..1)
-        arrays.push(direction(dx, dy, pos_x, pos_y)) unless dx.zero? && dy.zero?
+        array.push(direction(grid, dx, dy, x, y)) unless dx.zero? && dy.zero?
       end
     end
-    arrays
+    array
   end
 
   def valid_directions(pos_x, pos_y, player_color)
