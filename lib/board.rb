@@ -89,8 +89,14 @@ class Board
     grid
   end
 
-  def count_pieces
-    @grid.each { |x_space| x_space.each { |y_space| count(y_space) } }
+  def count_pieces(grid)
+    pieces = {Black: 0, White: 0 }
+    grid.flatten.reduce(pieces) { |accumulator, element|
+      if(element != :Empty)
+        accumulator[element] += 1
+      end
+      accumulator
+    }
   end
 
   def count(space)

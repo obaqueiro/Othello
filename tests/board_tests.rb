@@ -84,11 +84,9 @@ class TestBoard < Test::Unit::TestCase
                                         [:Empty, :Empty]], 5, 5))
    end
 
-#   def test_count_pieces
-#     @board.count_pieces
-#     assert_equal(2, @board.white_count)
-#     assert_equal(2, @board.black_count)
-#   end
+  def test_count_pieces
+    assert_equal({ Black: 3, White: 1 }, @board.count_pieces(@grid2))
+  end
 
 #   def test_count
 #     space = Space.new($window)
