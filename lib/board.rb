@@ -99,14 +99,6 @@ class Board
     }
   end
 
-  def count(space)
-    if space.state == :White
-      @white_count += 1
-    elsif space.state == :Black
-      @black_count += 1
-    end
-  end
-
   def othello_board_start
     @grid[3][3] = :White
     @grid[4][4] = :White
