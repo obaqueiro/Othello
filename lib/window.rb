@@ -50,14 +50,21 @@ class Window < Gosu::Window
     info_state
   end
 
+  def mouse_position
+    @x = (mouse_x / 50).floor
+    @y = ((mouse_y / 50) - 1).floor
+  end
+
+  def needs_cursor?
+    true
+  end
+
   def button_down(id)
     case id
     when Gosu::MsLeft
       begin
         # TODO: Need to fix game core
-
         raise ArgumentError, 'Invalid Move'
-        end_game_state
       rescue ArgumentError => e
         @prompts[:Center].text = "#{@current_player}\n#{e}"
       end
@@ -72,19 +79,11 @@ class Window < Gosu::Window
       if @settings[:Input]
 
         if @current_player == 'Black'
-          @player1 = Player.new(
-            Window: self,
-            Name: @input.text,
-            Color: 'Black'
-          )
+          @player1 = { Name: @input.text, Color: 'Black' }
           @current_player = 'White'
           @input.text = ''
         else
-          @player2 = Player.new(
-            Window: self,
-            Name: @input.text,
-            Color: 'White'
-          )
+          @player2 = { Name: @input.text, Color: 'White' }
           @current_player = 'White'
 
           @settings[:Input] = false
@@ -107,7 +106,6 @@ class Window < Gosu::Window
   end
 
   def draw
-    # TODO: Add drawing methods
     draw_board
     @prompts[:Right].draw(right_of_screen(@prompts[:Right].width), 0, 0)
     @prompts[:Left].draw(0, 0, 0)
@@ -127,15 +125,13 @@ class Window < Gosu::Window
   end
 
   def playing_state
-    # TODO: Create a gui state for the game being played
     @current_player = 'Black'
-    @prompts[:Left].text = "#{@player1.name}: #{@player1.color}"
-    @prompts[:Right].text = "#{@player2.name}: #{@player2.color}"
+    @prompts[:Left].text = "#{@player1[:Name]}: #{@player1[:Color]}"
+    @prompts[:Right].text = "#{@player2[:Name]}: #{@player2[:Color]}"
     @prompts[:Center].text = @current_player
   end
 
   def info_state
-    # TODO: Create a gui state for getting players names
     @current_player = 'Black'
     @prompts[:Left].text = ''
     @prompts[:Right].text = ''
@@ -146,13 +142,13 @@ class Window < Gosu::Window
   def end_game_state
     @score = {
       Black: 13,
-      White: 12}
+      White: 12
+    }
     @winner = 'Black'
 
     @prompts[:Left].text = 'Press R to reset game'
     @prompts[:Right].text = 'Press C to close game'
     @prompts[:Center].text = "Black: #{@score[:Black]} White: #{@score[:White]}\nWinner: #{@winner}"
-
   end
 
   def draw_board

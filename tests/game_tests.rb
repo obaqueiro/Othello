@@ -8,7 +8,6 @@ require_relative '../lib/game'
 require 'test/unit'
 require 'gosu'
 
-$window = Gosu::Window.new(400,450,false)
 
 class TestGame < Test::Unit::TestCase
   def setup
@@ -90,11 +89,10 @@ end
 class TestSpace < Test::Unit::TestCase
   def setup
     @space = Space.new($window)
-    @test_image = Gosu::Image.new($window,File.expand_path('images/White_Circle.png'), false)
+    @test_image = Gosu::Image.new($window, File.expand_path('images/White_Circle.png'), false)
   end
 
-  def teardown
-  end
+  def teardown; end
 
   def test_new_image
     assert_kind_of(Gosu::Image, @space.new_image(File.expand_path('images/White_Circle.png')))
