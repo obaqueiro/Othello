@@ -116,7 +116,7 @@ class Board
     false
   end
 
-  def change_piece(grid, color, x, y)
+  def place_piece(grid, color, x, y)
     grid[x][y] = color
     merge_changes(grid, change_all_pieces(x, y, color), x, y)
   end
