@@ -88,17 +88,10 @@ class TestBoard < Test::Unit::TestCase
     assert_equal({ Black: 3, White: 1 }, @board.count_pieces(@grid2))
   end
 
-#   def test_count
-#     space = Space.new($window)
-#     space.state = :Black
-#     @board.count(space)
-#     assert_equal(1, @board.black_count)
-#   end
-
-#   def test_valid_move?
-#     assert_equal(true, @board.valid_move?(:Black, 2, 3))
-#     assert_not_equal(true, @board.valid_move?(:Black, 5, 3))
-#   end
+  def test_valid_move?
+    assert(@board.valid_move?(:Black, 5, 5, @grid1))
+    assert(!@board.valid_move?(:Black, 5, 3, @grid1))
+  end
 
 #   def test_possible_move
 #     assert_equal(true, @board.possible_move(2, 3, :Black))

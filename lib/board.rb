@@ -91,12 +91,12 @@ class Board
 
   def count_pieces(grid)
     pieces = {Black: 0, White: 0 }
-    grid.flatten.reduce(pieces) { |accumulator, element|
+    grid.flatten.reduce(pieces) do |accumulator, element|
       if(element != :Empty)
         accumulator[element] += 1
       end
       accumulator
-    }
+    end
   end
 
   def othello_board_start
@@ -109,8 +109,8 @@ class Board
     # @grid[0][0].state(:White)
   end
 
-  def valid_move?(color, x, y)
-    @grid[x][y].state == :Empty && valid_directions?(x, y, color)
+  def valid_move?(color, x, y, grid)
+    grid[x][y] == :Empty && valid_directions?(grid, x, y, color)
   end
 
   def make_move(color, x, y)
