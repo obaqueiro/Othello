@@ -1,8 +1,8 @@
-require 'simplecov'
-SimpleCov.start
+# require 'simplecov'
+# SimpleCov.start
 
-require 'codecov'
-SimpleCov.formatter = SimpleCov::Formatter::Codecov
+# require 'codecov'
+# SimpleCov.formatter = SimpleCov::Formatter::Codecov
 
 require_relative '../lib/board'
 require 'test/unit'
@@ -93,9 +93,10 @@ class TestBoard < Test::Unit::TestCase
     assert(!@board.valid_move?(:Black, 5, 3, @grid1))
   end
 
-#   def test_possible_move
-#     assert_equal(true, @board.possible_move(2, 3, :Black))
-#   end
+  def test_moves_possible?
+    assert(@board.moves_possible?(@grid1, :Black))
+    assert(!@board.moves_possible?(@grid2, :White))
+  end
 
 #   def test_possible_moves
 #     assert_equal(true, @board.possible_moves(:Black))

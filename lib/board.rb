@@ -1,5 +1,3 @@
-require_relative 'space'
-
 class Board
   attr_accessor :white_count, :black_count
 
@@ -99,39 +97,30 @@ class Board
     end
   end
 
-  def othello_board_start
-    @grid[3][3] = :White
-    @grid[4][4] = :White
-    @grid[3][4] = :Black
-    @grid[4][3] = :Black
-    # test board end game
-    # @grid[1][0].state(:Black)
-    # @grid[0][0].state(:White)
-  end
 
   def valid_move?(color, x, y, grid)
-    grid[x][y] == :Empty && valid_directions?(grid, x, y, color)
+    grid[y][x] == :Empty && valid_directions?(grid, x, y, color)
   end
 
-  def make_move(color, x, y)
-    @grid[x][y].state = color
-    change_all_pieces(x, y, color)
-  end
 
-  def possible_move(x, y, player_color)
-    (@grid[x][y].state == :Empty) && valid_directions?(x, y, player_color)
-  end
-
-  def possible_moves(player_color)
+  def moves_possible?(grid, color)
     for x in (0..7)
       for y in (0..7)
-        return possible_move(x, y, player_color)
+        return true if valid_move?(color, x, y, grid)
       end
     end
     false
   end
 
-  def no_moves_left(player_color)
-    !possible_moves(player_color)
+  def othello_board_start
+    @grid[3][3] = :White
+    @grid[4][4] = :White
+    @grid[3][4] = :Black
+    @grid[4][3] = :Black
+  end
+
+  def place_piece(grid, color, x, y)
+    grid[x][y] = color
+    merge_changes(grid, change_all_pieces(x, y, color), x, y)
   end
 end
