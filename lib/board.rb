@@ -2,8 +2,6 @@ class Board
   attr_accessor :white_count, :black_count
 
   def initialize
-    @white_count = 0
-    @black_count = 0
     make_grid
     othello_board_start
   end
