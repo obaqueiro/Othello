@@ -1,8 +1,8 @@
-# require 'simplecov'
-# SimpleCov.start
+require 'simplecov'
+SimpleCov.start
 
-# require 'codecov'
-# SimpleCov.formatter = SimpleCov::Formatter::Codecov
+require 'codecov'
+SimpleCov.formatter = SimpleCov::Formatter::Codecov
 
 require_relative '../lib/board'
 require 'test/unit'
@@ -99,6 +99,6 @@ class TestBoard < Test::Unit::TestCase
   end
 
   def test_place_piece
-    assert_equal(@grid2, @board.place_piece(@grid1, :Black, 5, 5))
+    assert_equal(@grid2, @board.change_piece(@grid1, :Black, 5, 5))
   end
 end
