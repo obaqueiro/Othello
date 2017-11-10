@@ -12,6 +12,13 @@ class Board
     @grid = Array.new(8) { Array.new(8) { :Empty } }
   end
 
+  def othello_board_start
+    @grid[3][3] = :White
+    @grid[4][4] = :White
+    @grid[3][4] = :Black
+    @grid[4][3] = :Black
+  end
+
   def direction(grid, dx, dy, x, y)
     pos = [y + dy, x + dx]
     array = []
@@ -97,7 +104,6 @@ class Board
     end
   end
 
-
   def valid_move?(color, x, y, grid)
     grid[y][x] == :Empty && valid_directions?(grid, x, y, color)
   end
@@ -112,14 +118,7 @@ class Board
     false
   end
 
-  def othello_board_start
-    @grid[3][3] = :White
-    @grid[4][4] = :White
-    @grid[3][4] = :Black
-    @grid[4][3] = :Black
-  end
-
-  def place_piece(grid, color, x, y)
+  def change_piece(grid, color, x, y)
     grid[x][y] = color
     merge_changes(grid, change_all_pieces(x, y, color), x, y)
   end

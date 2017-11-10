@@ -98,11 +98,7 @@ class TestBoard < Test::Unit::TestCase
     assert(!@board.moves_possible?(@grid2, :White))
   end
 
-#   def test_possible_moves
-#     assert_equal(true, @board.possible_moves(:Black))
-#   end
-
-#   def test_no_moves_left
-#     assert_equal(false, @board.no_moves_left(:Black))
-#   end
+  def test_place_piece
+    assert_equal(@grid2, @board.place_piece(@grid1, :Black, 5, 5))
+  end
 end
