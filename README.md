@@ -28,5 +28,5 @@ to make a better GUI.
 
 All images included were created by me using Gimp 2
 
-[travis]:(https://travis-ci.org/phil0s0pher/Othello.svg?branch=master)
-[codacy]:(https://api.codacy.com/project/badge/Grade/03a3cfd677e640dca0aaf0502672dcfb)
+[travis]:https://travis-ci.org/phil0s0pher/Othello.svg?branch=master
+[codacy]:https://api.codacy.com/project/badge/Grade/03a3cfd677e640dca0aaf0502672dcfb
