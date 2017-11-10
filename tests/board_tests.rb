@@ -27,6 +27,15 @@ class TestBoard < Test::Unit::TestCase
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty]]
+
+    @grid3 = [[:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
+              [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
+              [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
+              [:Empty, :Empty, :Empty, :Black, :Empty, :Empty, :Empty, :Empty],
+              [:Empty, :White, :Empty, :Empty, :Black, :Empty, :Black, :Empty],
+              [:Empty, :Empty, :Empty, :Empty, :Empty, :Black, :Empty, :Empty],
+              [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
+              [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty]]
   end
 
    def test_direction
@@ -99,6 +108,6 @@ class TestBoard < Test::Unit::TestCase
   end
 
   def test_place_piece
-    assert_equal(@grid2, @board.place_piece(@grid1, :Black, 5, 5))
+    assert_equal(@grid3, @board.place_piece(@grid1, :Black, 5, 5))
   end
 end

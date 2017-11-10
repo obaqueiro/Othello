@@ -1,4 +1,4 @@
-# Othello-Ruby
+# Othello-Ruby ![alt text](https://travis-ci.org/phil0s0pher/Othello.svg?branch=master)
 Ruby version of Othello board game
 
 ### Requirements

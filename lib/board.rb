@@ -62,7 +62,13 @@ class Board
 
 
   def change_pieces_inline(direction, color)
-    direction.map {|piece| color }
+    direction.map {|piece|
+      if piece != color && piece != :Empty
+        color
+      else
+        piece
+      end
+    }
   end
 
   def change_all_pieces(directions, color)
@@ -117,7 +123,7 @@ class Board
   end
 
   def place_piece(grid, color, x, y)
-    grid[x][y] = color
-    merge_changes(grid, change_all_pieces(x, y, color), x, y)
+    grid[y][x] = color
+    merge_changes(grid, change_all_pieces(directions(grid, x, y), color), x, y)
   end
 end
