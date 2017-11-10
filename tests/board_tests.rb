@@ -69,6 +69,7 @@ class TestBoard < Test::Unit::TestCase
 
    def test_change_pieces_inline
      assert_equal([:White, :White, :White], @board.change_pieces_inline([:Black, :Black, :White], :White))
+     assert_equal([:White, :White, :White, :Empty], @board.change_pieces_inline([:Black, :Black, :White, :Empty], :White))
    end
 
    def test_change_all_pieces
