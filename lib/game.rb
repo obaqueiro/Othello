@@ -11,7 +11,6 @@ class Game
   def initialize(player1, player2, board)
     @board = board
     @players = [player1, player2]
-    # new_game
   end
 
   def grid
@@ -35,7 +34,7 @@ class Game
     array = []
     for x in (0..7)
       for y in (0..7)
-        array.push(valid_directions?(x, y, board, color))
+        array.push(valid_move?(x, y, board, color))
       end
     end
     array.include?(true)
@@ -65,7 +64,7 @@ class Game
   end
 
   def game_over?
-    moves_left?(@board, :Black) && moves_left?(@board, :White)
+    !(moves_left?(@board, :Black) || moves_left?(@board, :White))
   end
 
   def score
@@ -73,12 +72,12 @@ class Game
   end
 
   def winner
-    if(score[@players[0][:Color]] > score[@players[1][:Color]])
-      return @players[0][:Name]
-    elsif(score[@players[0][:Color]] < score[@players[1][:Color]])
-      return @players[1][:Name]
+    if score[@players[0][:Color]] > score[@players[1][:Color]]
+      @players[0][:Name]
+    elsif score[@players[0][:Color]] < score[@players[1][:Color]]
+      @players[1][:Name]
     else
-      return :Tie
+      :Tie
     end
   end
 end

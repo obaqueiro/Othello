@@ -40,7 +40,7 @@ class TestGame < Test::Unit::TestCase
               %i[Black Black Black Black Black Black Black White],
               %i[Black Black Black Black Black Black Black White],
               %i[Black Black Black Black Black Black Black White],
-              %i[Black Black Black Black White Black Black White],
+              %i[Black Black Black Black Black Black Black White],
               %i[Black Black Black Black Black Black Black White],
               %i[Black Black Black Black Black Black Black White],
               %i[Black White White White White White White Empty]]
@@ -49,7 +49,7 @@ class TestGame < Test::Unit::TestCase
               %i[Black Black Black Black Black Black Black Black],
               %i[Black Black Black Black Black Black Black Black],
               %i[Black Black Black Black Black Black Black Black],
-              %i[Black Black Black Black White Black Black Black],
+              %i[Black Black Black Black Black Black Black Black],
               %i[Black Black Black Black Black Black Black Black],
               %i[Black Black Black Black Black Black Black Black],
               %i[Black Black Black Black Black Black Black Black]]
@@ -85,8 +85,21 @@ class TestGame < Test::Unit::TestCase
   end
 
   def test_move_game_over
-    @game3.move(7,7)
+    @game3.move(7, 7)
     assert(@game3.game_over?)
+  end
+
+  def test_game_over
+    assert(!@game.game_over?)
+  end
+
+  def test_moves_left?
+    assert(@game.moves_left?(@game.board, :Black))
+    assert(@game.moves_left?(@game.board, :White))
+  end
+
+  def test_no_moves_left
+    assert(!@game3.moves_left?(@game.board, :White))
   end
 
   def test_valid_direction_empty_space

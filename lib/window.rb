@@ -68,14 +68,13 @@ class Window < Gosu::Window
         pos = mouse_position
         @game.move(pos[:x], pos[:y])
         @prompts[:Center].text = @game.current_player[:Color]
+        end_game_state if @game.game_over?
       rescue InvalidMove => e
         @prompts[:Center].text = "#{@game.current_player[:Color]}\n#{e}"
       end
 
     when Gosu::KbR
       reset unless @settings[:Input]
-    when Gosu::KbT
-      end_game_state
     when Gosu::KbC
       close unless @settings[:Input]
     when Gosu::KbReturn
@@ -144,11 +143,8 @@ class Window < Gosu::Window
   end
 
   def end_game_state
-    @score = {
-      Black: 13,
-      White: 12
-    }
-    @winner = 'Black'
+    @score = @game.score
+    @winner = @game.winner
 
     @prompts[:Left].text = 'Press R to reset game'
     @prompts[:Right].text = 'Press C to close game'
