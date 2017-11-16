@@ -1,4 +1,11 @@
 require_relative 'board'
+
+class InvalidMove < StandardError
+  def initialize(msg="Invalid Move")
+    super
+  end
+end
+
 class Game
   def initialize(player1, player2)
     @players = [player1, player2]
@@ -15,8 +22,12 @@ class Game
   end
 
   def move(x, y)
-    @board.place(x, y, current_player[:Color])
-    @players.reverse!
+    if board[y][x] == :Empty
+      @board.place(x, y, current_player[:Color])
+      @players.reverse!
+    else
+      raise InvalidMove
+    end
   end
 
   def skip_turn(player1, player2, current_turn)
