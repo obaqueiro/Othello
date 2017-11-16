@@ -14,6 +14,6 @@ Gem::Specification.new do |spec|
 
   spec.files         = ['lib/Othello.rb', 'lib/Othello_run.rb']
   # spec.executables   = ['bin/NAME']
-  spec.test_files    = ['tests/Othello_tests.rb']
+  spec.test_files    = ['tests/*.rb']
   spec.require_paths = ["lib"]
 end
