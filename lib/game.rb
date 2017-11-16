@@ -7,13 +7,14 @@ class InvalidMove < StandardError
 end
 
 class Game
-  def initialize(player1, player2)
+  attr_reader :board
+  def initialize(player1, player2, board)
+    @board = board
     @players = [player1, player2]
-    @board = Board.new
     # new_game
   end
 
-  def board
+  def grid
     @board.grid
   end
 
@@ -22,12 +23,16 @@ class Game
   end
 
   def move(x, y)
-    if board[y][x] == :Empty && valid_directions?(x, y, @board,current_player[:Color])
+    if valid_move?(x, y, @board, current_player[:Color])
       @board.place(x, y, current_player[:Color])
       @players.reverse!
     else
       raise InvalidMove
     end
+  end
+
+  def valid_move?(x, y, board, color)
+    grid[y][x] == :Empty && valid_directions?(x, y, board, color)
   end
 
   def valid_directions?(x, y, board, color)
