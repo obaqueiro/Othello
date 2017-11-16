@@ -1,11 +1,5 @@
-require 'simplecov'
-SimpleCov.start
-
-require 'codecov'
-SimpleCov.formatter = SimpleCov::Formatter::Codecov
-
+require_relative 'helper'
 require_relative '../lib/board'
-require 'test/unit'
 
 class TestBoard < Test::Unit::TestCase
   def setup

@@ -1,6 +1,6 @@
+require_relative 'helper'
 require_relative '../lib/game'
 require_relative '../lib/board'
-require 'test/unit'
 
 class TestGame < Test::Unit::TestCase
   def setup
