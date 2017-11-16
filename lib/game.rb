@@ -1,7 +1,7 @@
 require_relative 'board'
 
 class InvalidMove < StandardError
-  def initialize(msg="Invalid Move")
+  def initialize(msg = 'Invalid Move')
     super
   end
 end
@@ -68,4 +68,17 @@ class Game
     moves_left?(@board, :Black) && moves_left?(@board, :White)
   end
 
+  def score
+    board.pieces
+  end
+
+  def winner
+    if(score[@players[0][:Color]] > score[@players[1][:Color]])
+      return @players[0][:Name]
+    elsif(score[@players[0][:Color]] < score[@players[1][:Color]])
+      return @players[1][:Name]
+    else
+      return :Tie
+    end
+  end
 end

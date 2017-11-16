@@ -112,6 +112,10 @@ class Board
     end
   end
 
+  def pieces
+    count_pieces(@grid)
+  end
+
   def valid_move?(color, x, y, grid)
     grid[y][x] == :Empty && valid_directions?(grid, x, y, color)
   end

@@ -45,6 +45,14 @@ class TestGame < Test::Unit::TestCase
               %i[Black Black Black Black Black Black Black White],
               %i[Black White White White White White White Empty]]
 
+    @grid4 = [%i[Black Black Black Black Black Black Black Black],
+              %i[Black Black Black Black Black Black Black Black],
+              %i[Black Black Black Black Black Black Black Black],
+              %i[Black Black Black Black Black Black Black Black],
+              %i[Black Black Black Black White Black Black Black],
+              %i[Black Black Black Black Black Black Black Black],
+              %i[Black Black Black Black Black Black Black Black],
+              %i[Black Black Black Black Black Black Black Black]]
 
     @board2.grid = @grid2
     @board3.grid = @grid3
@@ -57,7 +65,6 @@ class TestGame < Test::Unit::TestCase
     assert_equal(@grid1, @game.grid)
     assert_equal(@player2, @game.current_player)
   end
-
 
   def test_next_player_has_no_moves
     @game2.move(4, 5)
@@ -94,5 +101,9 @@ class TestGame < Test::Unit::TestCase
   def test_valid_directions
     assert(!@game.valid_directions?(4, 4, @board, :Black))
     assert(@game.valid_directions?(4, 5, @board, :Black))
+  end
+
+  def test_winner
+    assert_equal(@player1[:Name], @game3.winner)
   end
 end
