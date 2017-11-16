@@ -1,9 +1,3 @@
-require 'simplecov'
-SimpleCov.start
-
-require 'codecov'
-SimpleCov.formatter = SimpleCov::Formatter::Codecov
-
 require_relative '../lib/game'
 require_relative '../lib/board'
 require 'test/unit'
