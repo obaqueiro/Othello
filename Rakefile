@@ -1,3 +1,5 @@
+require 'rake/testtask'
+
 task default: %w[test]
 
 task :run do
@@ -10,7 +12,9 @@ end
 
 multitask :gui => [:win, :run] do
 end
-task :test do
-  # ruby "./tests/game_tests.rb"
-  ruby "./tests/board_tests.rb"
+
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList['tests/test*.rb']
+  t.verbose = true
 end
