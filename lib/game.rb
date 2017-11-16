@@ -22,12 +22,31 @@ class Game
   end
 
   def move(x, y)
-    if board[y][x] == :Empty
+    if board[y][x] == :Empty && valid_directions?(x, y, @board,current_player[:Color])
       @board.place(x, y, current_player[:Color])
       @players.reverse!
     else
       raise InvalidMove
     end
+  end
+
+  def valid_directions?(x, y, board, color)
+    array = board.directions(board.grid, x, y).map { |direction| valid_direction?(color, direction)}
+    array.include?(true)
+  end
+
+  def valid_direction?(color, direction)
+    opp_color = false
+    direction.each	do |space|
+      if space == :Empty
+        return false
+      elsif space == color
+        return opp_color
+      else
+        opp_color = true
+      end
+    end
+    false
   end
 
   def skip_turn(player1, player2, current_turn)
