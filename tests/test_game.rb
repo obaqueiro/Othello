@@ -12,6 +12,7 @@ require 'test/unit'
 class TestGame < Test::Unit::TestCase
   def setup
     @board = Board.new
+    @board2 = Board.new
     @player1 = {Name: "Jeff", Color: :Black}
     @player2 = {Name: "Lily", Color: :White}
     @game = Game.new(@player1, @player2, @board)
@@ -24,12 +25,29 @@ class TestGame < Test::Unit::TestCase
               [:Empty, :Empty, :Empty, :Empty, :Black, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty]]
+
+    @grid2= [[:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
+             [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
+             [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
+             [:Empty, :Empty, :Empty, :Black, :Black, :Empty, :Empty, :Empty],
+             [:Empty, :Empty, :Empty, :Black, :White, :Empty, :Empty, :Empty],
+             [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
+             [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
+             [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty]]
+    @board2.grid = @grid2
+    @game2 = Game.new(@player1, @player2, @board2)
   end
 
   def test_move_happy_path
     @game.move(4, 5)
     assert_equal(@grid1, @game.grid)
     assert_equal(@player2, @game.current_player)
+  end
+
+  def test_next_player_has_no_moves
+    @game2.move(4,5)
+    assert_equal(@grid2, @game2.grid)
+    assert_equal(@player1, @game2.current_player)
   end
 
   def test_move_cell_already_occupied
@@ -44,17 +62,17 @@ class TestGame < Test::Unit::TestCase
     }
   end
 
-    def test_valid_direction_empty_space
-      assert(!@game.valid_direction?(:Black, [:Empty, :White]))
-      assert(!@game.valid_direction?(:Black, [:White, :White, :Empty]))
-    end
+  def test_valid_direction_empty_space
+    assert(!@game.valid_direction?(:Black, [:Empty, :White]))
+    assert(!@game.valid_direction?(:Black, [:White, :White, :Empty]))
+  end
 
-    def test_valid_direction
-      assert(@game.valid_direction?(:Black, [:White, :White, :Black]))
-    end
+  def test_valid_direction
+    assert(@game.valid_direction?(:Black, [:White, :White, :Black]))
+  end
 
-    def test_valid_directions
-      assert(!@game.valid_directions?(4, 4, @board, :Black))
-      assert(@game.valid_directions?(4, 5, @board, :Black))
-    end
+  def test_valid_directions
+    assert(!@game.valid_directions?(4, 4, @board, :Black))
+    assert(@game.valid_directions?(4, 5, @board, :Black))
+  end
 end
