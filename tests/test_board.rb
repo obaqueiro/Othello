@@ -13,8 +13,8 @@ class TestBoard < Test::Unit::TestCase
     @grid1 = [[:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
-              [:Empty, :Empty, :Empty, :Black, :Empty, :Empty, :Empty, :Empty],
-              [:Empty, :White, :Empty, :Empty, :White, :Empty, :Black, :Empty],
+              [:Empty, :Empty, :Empty, :White, :Black, :Empty, :Empty, :Empty],
+              [:Empty, :Empty, :Empty, :Black, :White, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty]]
@@ -22,8 +22,8 @@ class TestBoard < Test::Unit::TestCase
     @grid2 = [[:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
-              [:Empty, :Empty, :Empty, :Black, :Empty, :Empty, :Empty, :Empty],
-              [:Empty, :White, :Empty, :Empty, :Black, :Empty, :Black, :Empty],
+              [:Empty, :Empty, :Empty, :Black, :Black, :Empty, :Empty, :Empty],
+              [:Empty, :Empty, :Empty, :Black, :Black, :Empty, :Black, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty]]
@@ -31,25 +31,25 @@ class TestBoard < Test::Unit::TestCase
     @grid3 = [[:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
-              [:Empty, :Empty, :Empty, :Black, :Empty, :Empty, :Empty, :Empty],
-              [:Empty, :White, :Empty, :Empty, :Black, :Empty, :Black, :Empty],
-              [:Empty, :Empty, :Empty, :Empty, :Empty, :Black, :Empty, :Empty],
+              [:Empty, :Empty, :Empty, :White, :Black, :Empty, :Empty, :Empty],
+              [:Empty, :Empty, :Empty, :Black, :Black, :Empty, :Empty, :Empty],
+              [:Empty, :Empty, :Empty, :Empty, :Black, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty],
               [:Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty, :Empty]]
   end
 
    def test_direction
-     assert_equal([:Empty, :Empty, :White, :Empty], @board.direction(@grid1, -1, 0, 4, 4))
+     assert_equal([:Black, :Empty, :Empty, :Empty], @board.direction(@grid1, -1, 0, 4, 4))
    end
 
    def test_directions
-     assert_equal([[:Black, :Empty, :Empty, :Empty],
-                   [:Empty, :Empty, :White, :Empty],
+     assert_equal([[:White, :Empty, :Empty, :Empty],
+                   [:Black, :Empty, :Empty, :Empty],
                    [:Empty, :Empty, :Empty],
-                   [:Empty, :Empty, :Empty, :Empty],
+                   [:Black, :Empty, :Empty, :Empty],
                    [:Empty, :Empty, :Empty],
                    [:Empty, :Empty, :Empty],
-                   [:Empty, :Black, :Empty],
+                   [:Empty, :Empty, :Empty],
                    [:Empty, :Empty, :Empty]], @board.directions(@grid1, 4, 4))
    end
 
@@ -64,7 +64,7 @@ class TestBoard < Test::Unit::TestCase
 
    def test_valid_directions
      assert(!@board.valid_directions?(@grid1, 4, 4, :Black))
-     assert(@board.valid_directions?(@grid1, 5, 5, :Black))
+     assert(@board.valid_directions?(@grid1, 4, 5, :Black))
    end
 
    def test_change_pieces_inline
@@ -95,11 +95,11 @@ class TestBoard < Test::Unit::TestCase
    end
 
   def test_count_pieces
-    assert_equal({ Black: 3, White: 1 }, @board.count_pieces(@grid2))
+    assert_equal({ Black: 2, White: 2 }, @board.count_pieces(@grid1))
   end
 
   def test_valid_move?
-    assert(@board.valid_move?(:Black, 5, 5, @grid1))
+    assert(@board.valid_move?(:Black, 4, 5, @grid1))
     assert(!@board.valid_move?(:Black, 5, 3, @grid1))
   end
 
@@ -109,6 +109,6 @@ class TestBoard < Test::Unit::TestCase
   end
 
   def test_place_piece
-    assert_equal(@grid3, @board.place_piece(@grid1, :Black, 5, 5))
+    assert_equal(@grid3, @board.place_piece(@grid1, :Black, 4, 5))
   end
 end

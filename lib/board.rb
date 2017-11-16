@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :white_count, :black_count
+  attr_accessor :grid
 
   def initialize
     make_grid
@@ -62,13 +62,17 @@ class Board
 
 
   def change_pieces_inline(direction, color)
-    direction.map {|piece|
-      if piece != color && piece != :Empty
+    seen_color = false
+    direction.map { |piece|
+      if piece == color
+        seen_color = true
+        piece
+      elsif piece != :Empty && !seen_color
         color
       else
         piece
       end
-    }
+    } 
   end
 
   def change_all_pieces(directions, color)
@@ -125,5 +129,9 @@ class Board
   def place_piece(grid, color, x, y)
     grid[y][x] = color
     merge_changes(grid, change_all_pieces(directions(grid, x, y), color), x, y)
+  end
+
+  def place(x, y, color)
+    @grid = place_piece(@grid, color, x, y)
   end
 end
