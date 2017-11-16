@@ -1,8 +1,22 @@
 require_relative 'board'
-require_relative 'player'
 class Game
-  def initialize
-    new_game
+  def initialize(player1, player2)
+    @players = [player1, player2]
+    @board = Board.new
+    # new_game
+  end
+
+  def board
+    @board.grid
+  end
+
+  def current_player
+    @players[0]
+  end
+
+  def move(x, y)
+    @board.place(x, y, current_player[:Color])
+    @players.reverse!
   end
 
   def skip_turn(player1, player2, current_turn)
