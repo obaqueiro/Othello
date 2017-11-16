@@ -45,7 +45,8 @@ class Window < Gosu::Window
                 Empty: Gosu::Image.new(File.expand_path('images/Empty_Space.png'), false) }
 
     @settings = {
-      input: false
+      input: false,
+      mouse: false
     }
     @current_player = 'Black'
     info_state
@@ -58,12 +59,13 @@ class Window < Gosu::Window
   end
 
   def needs_cursor?
-    true
+    true if @settings[:mouse]
   end
 
   def button_up(id)
     case id
     when Gosu::MsLeft
+      if @settings[:mouse]
       begin
         pos = mouse_position
         @game.move(pos[:x], pos[:y])
@@ -71,6 +73,7 @@ class Window < Gosu::Window
         end_game_state if @game.game_over?
       rescue InvalidMove => e
         @prompts[:Center].text = "#{@game.current_player[:Color]}\n#{e}"
+      end
       end
 
     when Gosu::KbR
@@ -132,6 +135,7 @@ class Window < Gosu::Window
     @prompts[:Left].text = "#{@player1[:Name]}: #{@player1[:Color]}"
     @prompts[:Right].text = "#{@player2[:Name]}: #{@player2[:Color]}"
     @prompts[:Center].text = @current_player
+    @settings[:mouse] = true
   end
 
   def info_state
@@ -139,6 +143,7 @@ class Window < Gosu::Window
     @prompts[:Left].text = ''
     @prompts[:Right].text = ''
     @settings[:Input] = true
+    @settings[:mouse] = false
     self.text_input = @input
   end
 
