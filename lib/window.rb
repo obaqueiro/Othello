@@ -1,5 +1,6 @@
 require 'gosu'
-require_relative 'player'
+require_relative 'board'
+require_relative 'game'
 
 class TextImage
   def initialize(text, line_height, options = {})
@@ -51,22 +52,24 @@ class Window < Gosu::Window
   end
 
   def mouse_position
-    @x = (mouse_x / 50).floor
-    @y = ((mouse_y / 50) - 1).floor
+    x = (mouse_x / 50).floor
+    y = ((mouse_y / 50) - 1).floor
+    { x: x, y: y }
   end
 
   def needs_cursor?
     true
   end
 
-  def button_down(id)
+  def button_up(id)
     case id
     when Gosu::MsLeft
       begin
-        # TODO: Need to fix game core
-        raise ArgumentError, 'Invalid Move'
-      rescue ArgumentError => e
-        @prompts[:Center].text = "#{@current_player}\n#{e}"
+        pos = mouse_position
+        @game.move(pos[:x], pos[:y])
+        @prompts[:Center].text = @game.current_player[:Color]
+      rescue InvalidMove => e
+        @prompts[:Center].text = "#{@game.current_player[:Color]}\n#{e}"
       end
 
     when Gosu::KbR
@@ -79,11 +82,11 @@ class Window < Gosu::Window
       if @settings[:Input]
 
         if @current_player == 'Black'
-          @player1 = { Name: @input.text, Color: 'Black' }
+          @player1 = { Name: @input.text, Color: :Black }
           @current_player = 'White'
           @input.text = ''
         else
-          @player2 = { Name: @input.text, Color: 'White' }
+          @player2 = { Name: @input.text, Color: :White }
           @current_player = 'White'
 
           @settings[:Input] = false
@@ -91,6 +94,7 @@ class Window < Gosu::Window
           @input.text = ''
           @prompts[:Center].text = ''
 
+          @game = Game.new(@player1, @player2, Board.new)
           playing_state
         end
       end
@@ -154,7 +158,7 @@ class Window < Gosu::Window
   def draw_board
     for x in (0..7)
       for y in (0..7)
-        draw_space(x, y, @board[x][y])
+        draw_space(x, y, @game.grid[y][x]) if @game
       end
     end
   end

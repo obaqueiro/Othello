@@ -64,13 +64,4 @@ class Game
     false
   end
 
-
-  def skip_turn(player1, player2, current_turn)
-    if (player1.color == current_turn) && @board.no_moves_left(player1.color)
-      switch_turns(current_turn)
-    elsif (player2.color == current_turn) && @board.no_moves_left(player2.color)
-      switch_turns(current_turn)
-    end
-  end
-
 end
