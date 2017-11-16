@@ -64,4 +64,8 @@ class Game
     false
   end
 
+  def game_over?
+    moves_left?(@board, :Black) && moves_left?(@board, :White)
+  end
+
 end
