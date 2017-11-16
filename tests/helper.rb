@@ -3,8 +3,9 @@ SimpleCov.start
 
 require 'codecov'
 SimpleCov.formatter = SimpleCov::Formatter::Codecov
+require 'test/unit'
 
 SimpleCov.start do
   # e.g., usage of track files
-  track_files "/app/**/*.rb"
+  track_files "../**/*.rb"
 end
