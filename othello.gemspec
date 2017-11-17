@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   # spec.homepage      = "http://domainforproject.com/"
   spec.license       = "MIT"
 
-  spec.files         = ['lib/Othello.rb', 'lib/Othello_run.rb']
+  spec.files         = ['lib/Othello.rb']
   # spec.executables   = ['bin/NAME']
   spec.test_files    = ['tests/*.rb']
   spec.require_paths = ["lib"]
