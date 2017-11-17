@@ -20,7 +20,7 @@ class Board
   def direction(grid, dx, dy, x, y)
     pos = [y + dy, x + dx]
     array = []
-    until (pos[0] > 7) || (pos[0] < 0) || (pos[1] > 7) || (pos[1] < 0)
+    while (0..7).cover?(pos[0]) && (0..7).cover?(pos[1])
       array.push(grid[pos[0]][pos[1]])
       pos = add_delta(dx, dy, pos)
     end
