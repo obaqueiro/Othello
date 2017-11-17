@@ -33,11 +33,11 @@ class Board
 
   def directions(grid, x, y)
     array = []
-    for dx in (-1..1)
-      for dy in (-1..1)
+    (-1..1).each { |dx| 
+      (-1..1).each { |dy| 
         array.push(direction(grid, dx, dy, x, y)) unless dx.zero? && dy.zero?
-      end
-    end
+      }
+    }
     array
   end
 
@@ -87,8 +87,8 @@ class Board
 
   def merge_changes(grid, directions, x, y)
     i = 0
-    for dx in (-1..1)
-      for dy in (-1..1)
+    (-1..1).each { |dx| 
+      (-1..1).each { |dy| 
         unless dx.zero? && dy.zero?
           pos = [y + dy, x + dx]
           directions[i].each { |space| 
@@ -97,8 +97,8 @@ class Board
           }
           i += 1
         end
-      end
-    end
+      }
+    }
     grid
   end
 
