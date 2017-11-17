@@ -2,7 +2,13 @@ require 'simplecov'
 SimpleCov.start
 
 require 'codecov'
+require 'codacy-coverage'
 SimpleCov.formatter = SimpleCov::Formatter::Codecov
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
+                                                                 SimpleCov::Formatter::HTMLFormatter,
+                                                                 Codacy::Formatter,
+                                                                 SimpleCov::Formatter::Codecov
+                                                               ])
 require 'test/unit'
 
 SimpleCov.start 'rails' do
