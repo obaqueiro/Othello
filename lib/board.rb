@@ -122,12 +122,13 @@ class Board
 
 
   def moves_possible?(grid, color)
-    for x in (0..7)
-      for y in (0..7)
-        return true if valid_move?(color, x, y, grid)
-      end
-    end
-    false
+    array = []
+    grid.each_with_index { |_, xi|
+      _.each_with_index { |_, yi|
+        array.push(valid_move?(color, xi, yi, grid))
+      }
+    }
+    array.include?(true)
   end
 
   def place_piece(grid, color, x, y)
