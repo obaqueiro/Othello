@@ -8,7 +8,7 @@ end
 
 class Game
   attr_reader :board
-  def initialize(player1, player2, board)
+  def initialize(player1, player2, board = Board.new)
     @board = board
     @players = [player1, player2]
   end

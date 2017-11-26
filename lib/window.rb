@@ -38,8 +38,6 @@ class Window < Gosu::Window
       Right: TextImage.new('', 20, align: :center, width: 133)
     }
 
-    @board = Array.new(8) { Array.new(8) { :Empty } }
-
     @images = { White: Gosu::Image.new(File.expand_path('images/White_Circle.png'), false),
                 Black: Gosu::Image.new(File.expand_path('images/Black_Circle.png'), false),
                 Empty: Gosu::Image.new(File.expand_path('images/Empty_Space.png'), false) }
@@ -48,6 +46,7 @@ class Window < Gosu::Window
       input: false,
       mouse: false
     }
+
     @current_player = 'Black'
     info_state
   end
@@ -96,7 +95,7 @@ class Window < Gosu::Window
           @input.text = ''
           @prompts[:Center].text = ''
 
-          @game = Game.new(@player1, @player2, Board.new)
+          @game = Game.new(@player1, @player2)
           playing_state
         end
       end
