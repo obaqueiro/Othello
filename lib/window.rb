@@ -65,14 +65,14 @@ class Window < Gosu::Window
     case id
     when Gosu::MsLeft
       if @settings[:mouse]
-      begin
-        pos = mouse_position
-        @game.move(pos[:x], pos[:y])
-        @prompts[:Center].text = @game.current_player[:Color]
-        end_game_state if @game.game_over?
-      rescue InvalidMove => e
-        @prompts[:Center].text = "#{@game.current_player[:Color]}\n#{e}"
-      end
+        begin
+          pos = mouse_position
+          @game.move(pos[:x], pos[:y])
+          @prompts[:Center].text = @game.current_player[:Color]
+          end_game_state if @game.game_over?
+        rescue InvalidMove => e
+          @prompts[:Center].text = "#{@game.current_player[:Color]}\n#{e}"
+        end
       end
 
     when Gosu::KbR
