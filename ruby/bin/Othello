@@ -1,0 +1,4 @@
+require_relative "../lib/window.rb"
+
+window = Window.new
+window.show

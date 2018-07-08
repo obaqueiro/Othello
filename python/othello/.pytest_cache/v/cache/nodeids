@@ -1,0 +1,5 @@
+[
+  "tests/test_bit_board.py::TestBitBoardValidation::()::test_invalid_value_lower",
+  "tests/test_bit_board.py::TestBitBoardValidation::()::test_invalid_value_higher",
+  "tests/test_bit_board.py::TestBitBoardValidation::()::test_invalid_cell_lower"
+]

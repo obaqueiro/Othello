@@ -33,11 +33,42 @@ class TestBoard < Test::Unit::TestCase
   end
 
   def test_direction
-    assert_equal(%i[Black Empty Empty Empty], @board.direction(@grid1, -1, 0, 4, 4))
+    assert_equal([{x: 3, y: 4, c: :Black},
+                  {x: 2, y: 4, c: :Empty},
+                  {x: 1, y: 4, c: :Empty},
+                  {x: 0, y: 4, c: :Empty}], @board.direction(@grid1, 4, 4, -1, 0))
   end
 
   def test_directions
-    assert_equal([%i[White Empty Empty Empty],
+    assert_equal([[{x: 3, y: 3, c: :White},
+                   {x: 2, y: 2, c: :Empty},
+                   {x: 1, y: 1, c: :Empty},
+                   {x: 0, y: 0, c: :Empty}],
+                  [{x: 3, y: 4, c: :Black},
+                   {x: 2, y: 4, c: :Empty},
+                   {x: 1, y: 4, c: :Empty},
+                   {x: 0, y: 4, c: :Empty}],
+                  [{x: 3, y: 4, c: :White},
+                   {x: 3, y: 4, c: :Empty},
+                   {x: 3, y: 4, c: :Empty},
+                   {x: 3, y: 4, c: :Empty}],
+                  [{x: 3, y: 4, c: :White},
+                   {x: 3, y: 4, c: :Empty},
+                   {x: 3, y: 4, c: :Empty},
+                   {x: 3, y: 4, c: :Empty}],
+                  [{x: 3, y: 4, c: :White},
+                   {x: 3, y: 4, c: :Empty},
+                   {x: 3, y: 4, c: :Empty},
+                   {x: 3, y: 4, c: :Empty}],
+                  [{x: 3, y: 4, c: :White},
+                   {x: 3, y: 4, c: :Empty},
+                   {x: 3, y: 4, c: :Empty},
+                   {x: 3, y: 4, c: :Empty}],
+                  [{x: 3, y: 4, c: :White},
+                   {x: 3, y: 4, c: :Empty},
+                   {x: 3, y: 4, c: :Empty},
+                   {x: 3, y: 4, c: :Empty}],
+                  %i[White Empty Empty Empty],
                   %i[Black Empty Empty Empty],
                   %i[Empty Empty Empty],
                   %i[Black Empty Empty Empty],

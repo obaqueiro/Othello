@@ -17,12 +17,14 @@ class Board
     @grid[4][3] = :Black
   end
 
-  def direction(grid, dx, dy, x, y)
-    pos = [y + dy, x + dx]
+  def direction(grid, x, y, dx, dy)
+    x += dx
+    y += dy
     array = []
-    while (0..7).cover?(pos[0]) && (0..7).cover?(pos[1])
-      array.push(grid[pos[0]][pos[1]])
-      pos = add_delta(dx, dy, pos)
+    while (0..7).cover?(x) && (0..7).cover?(y)
+      array.push({x: x, y: y, c: grid[y][x]})
+      x += dx
+      y += dy
     end
     array
   end
@@ -35,7 +37,7 @@ class Board
     array = []
     (-1..1).each { |dx| 
       (-1..1).each { |dy| 
-        array.push(direction(grid, dx, dy, x, y)) unless dx.zero? && dy.zero?
+        array.push(direction(grid, x, y, dx, dy)) unless dx.zero? && dy.zero?
       }
     }
     array
