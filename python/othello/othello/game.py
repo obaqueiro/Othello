@@ -1,11 +1,14 @@
+from bit_board import BitBoard
 from pprint import pprint
 from typing import Iterator
 from utils import grouper, which_piece, bit_board
 
 
 class Game():
-    def __init__(self):
-        self.boards = {"black": 2**27 + 2**36, "white": 0x810000000}
+    def __init__(self,
+                 black: BitBoard = BitBoard(cells = [27, 36]),
+                 white: BitBoard = BitBoard(cells = [28, 35])) -> None:
+        self.boards = [black, white]
         self.masks = {
             "right": 0X7F7F7F7F7F7F7F7F,
             "left": 0xFEFEFEFEFEFEFEFE,

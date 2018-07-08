@@ -1,5 +1,8 @@
 [
   "tests/test_bit_board.py::TestBitBoardValidation::()::test_invalid_value_lower",
   "tests/test_bit_board.py::TestBitBoardValidation::()::test_invalid_value_higher",
-  "tests/test_bit_board.py::TestBitBoardValidation::()::test_invalid_cell_lower"
+  "tests/test_bit_board.py::TestBitBoardValidation::()::test_invalid_cell_lower",
+  "tests/test_bit_board.py::TestBitBoardValidation::()::test_invalid_cell_higher",
+  "tests/test_bit_board.py::TestBitBoardValidation::()::test_happy_path_value",
+  "tests/test_bit_board.py::TestBitBoardValidation::()::test_happy_path_cells"
 ]

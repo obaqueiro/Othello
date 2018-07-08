@@ -1,3 +1,3 @@
 {
-  "tests/test_bit_board.py::TestBitBoardValidation::()": true
+  "tests/test_bit_board.py::TestBitBoardValidation": true
 }
