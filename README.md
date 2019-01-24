@@ -10,6 +10,13 @@ The versions used for testing were:
 ruby version 2.1.5  
 gosu version 0.8.6  
 
+### Running in Mac
+
+1. Install sdl2  via `brew install sdl2`
+2. Install "bundler" via `gem install bundler` 
+3. Run `bundle install`
+4. Run  `ruby lib/window.rb` 
+
 ### Operation
 
 To run the game go to your command prompt change directories to the directory containing the Othello_run.rb. When in said directory type "ruby Othello_run.rb" and press enter. Example 
