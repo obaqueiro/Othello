@@ -10,7 +10,7 @@ The versions used for testing were:
 ruby version 2.1.5  
 gosu version 0.8.6  
 
-### Running in Mac
+### Running on Mac
 
 1. Install sdl2  via `brew install sdl2`
 2. Install "bundler" via `gem install bundler` 
